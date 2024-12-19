@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+{% extends 'navbar/projectnavbar.html' %}
+{% load static %}
+<html>
+<head>
+    <title>Player List</title>
+    <style>
+        /* Body styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000; /* Black background */
+            color: #eaeaea; /* Light grey text */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Container styling */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        /* Table styling */
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #1a1a1a; /* Dark background for the table */
+            box-shadow: 0px 4px 8px rgba(0, 128, 0, 0.6); /* Green shadow around the table */
+            border-radius: 10px; /* Rounded corners for the table */
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #39ff14; /* Neon green border */
+            text-align: left;
+        }
+
+        th {
+            background-color: #1a1a1a; /* Dark background for the table header */
+            color: #39ff14; /* Neon green text */
+        }
+
+        td {
+            background-color: #1a1a1a; /* Dark background for the table cells */
+            color: #eaeaea; /* Light grey text */
+        }
+
+        /* Message styling */
+        .alert {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0px 4px 8px rgba(0, 128, 0, 0.5); /* Green shadow */
+        }
+
+        .alert-success {
+            background-color: #28a745; /* Green background for success */
+        }
+
+        .alert-error {
+            background-color: #dc3545; /* Red background for errors */
+        }
+
+        /* Styling for the message box on hover */
+        .alert:hover {
+            transform: translateY(-4px);
+            box-shadow: 0px 8px 16px rgba(0, 128, 0, 0.8); /* Stronger green shadow on hover */
+        }
+
+    </style>
+</head>
+<body>
+
+{% block body %}
+    <div class="container">
+        <!-- Display messages -->
+        {% if messages %}
+            <div class="alert {% for message in messages %}alert-{{ message.tags }}{% endfor %}">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <h2>Player List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Player ID</th>
+                    <th>Player Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                    <tr>
+                        <td>{{ player.player_id }}</td>
+                        <td>{{ player.player_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% extends 'navbar/projectnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-image: url('{% static 'images/adminapp/register.jpg' %}'); background-size: cover; background-position: center; color: #eaeaea; margin: 0; padding: 0; box-sizing: border-box;">
+
+{% block body %}
+
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; padding: 20px;">
+        <div style="width: 100%; max-width: 500px; background-color: rgba(0, 0, 0, 0.7); border-radius: 15px; padding: 40px; box-shadow: 0 8px 16px rgba(0, 128, 0, 0.3); margin: 20px; box-shadow: 0 8px 16px rgba(0, 128, 0, 0.4), 0 0 10px rgba(0, 128, 0, 0.4);">
+            <h2 style="font-size: 30px; color: #39ff14; text-align: center; margin-bottom: 30px; font-weight: 600;">Create Your Account</h2>
+
+            <!-- Message for 2-digit and 5-digit IDs -->
+            <p style="font-size: 16px; color: #39ff14; text-align: center; margin-bottom: 20px;">Please note:
+                <br>2-digit ID is for players.
+                <br>5-digit ID is for users.
+            </p>
+
+            <form action="{% url 'userregisterlogic' %}" method="post" style="display: flex; flex-direction: column;">
+                {% csrf_token %}
+
+                <label for="username" style="font-size: 16px; color: #39ff14; margin-bottom: 8px; font-weight: 500;">Username</label>
+                <input type="text" id="username" name="username" required style="padding: 14px; border: 1px solid #66b366; border-radius: 8px; margin-bottom: 20px; background-color: #222; color: #39ff14; font-size: 16px; box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);">
+
+                <label for="first_name" style="font-size: 16px; color: #39ff14; margin-bottom: 8px; font-weight: 500;">First Name</label>
+                <input type="text" id="first_name" name="first_name" required style="padding: 14px; border: 1px solid #66b366; border-radius: 8px; margin-bottom: 20px; background-color: #222; color: #39ff14; font-size: 16px; box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);">
+
+                <label for="last_name" style="font-size: 16px; color: #39ff14; margin-bottom: 8px; font-weight: 500;">Last Name</label>
+                <input type="text" id="last_name" name="last_name" required style="padding: 14px; border: 1px solid #66b366; border-radius: 8px; margin-bottom: 20px; background-color: #222; color: #39ff14; font-size: 16px; box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);">
+
+                <label for="email" style="font-size: 16px; color: #39ff14; margin-bottom: 8px; font-weight: 500;">Email</label>
+                <input type="email" id="email" name="email" required style="padding: 14px; border: 1px solid #66b366; border-radius: 8px; margin-bottom: 20px; background-color: #222; color: #39ff14; font-size: 16px; box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);">
+
+                <label for="password" style="font-size: 16px; color: #39ff14; margin-bottom: 8px; font-weight: 500;">Password</label>
+                <input type="password" id="password" name="password" required style="padding: 14px; border: 1px solid #66b366; border-radius: 8px; margin-bottom: 20px; background-color: #222; color: #39ff14; font-size: 16px; box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);">
+
+                <label for="password1" style="font-size: 16px; color: #39ff14; margin-bottom: 8px; font-weight: 500;">Confirm Password</label>
+                <input type="password" id="password1" name="password1" required style="padding: 14px; border: 1px solid #66b366; border-radius: 8px; margin-bottom: 30px; background-color: #222; color: #39ff14; font-size: 16px; box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);">
+
+                <input type="submit" value="Register" style="background-color: #39ff14; color: #111; padding: 14px; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; transition: background-color 0.3s ease; box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);">
+            </form>
+
+            {% if messages %}
+            <ul style="list-style-type: none; padding: 0; margin-top: 20px; text-align: center;">
+                {% for message in messages %}
+                    <li style="color: #ff4d4d; font-size: 14px; margin-top: 10px;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+</body>
+</html>

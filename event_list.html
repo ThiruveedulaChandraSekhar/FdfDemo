@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+{% extends 'navbar/projectnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event List</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Deep black background */
+            color: #e0e0e0; /* Off-white text for high contrast */
+            box-sizing: border-box;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Main container for centering content */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* Header Section */
+        .header {
+            font-size: 36px;
+            font-weight: bold;
+            color: #39ff14; /* Neon Green */
+            margin-bottom: 40px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(0, 255, 0, 0.6); /* Glowing text */
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        /* Event List Styles */
+        .event-list {
+            width: 100%;
+            background-color: #1a1a1a;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .event-list:hover {
+            box-shadow: 0 0 60px rgba(0, 255, 0, 0.8); /* Stronger glow on hover */
+            transform: translateY(-5px);
+        }
+
+        /* List items styling */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 15px;
+            font-size: 18px;
+            color: #e0e0e0;
+            background-color: #252525;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        li:hover {
+            background-color: #333; /* Darker on hover */
+            transform: translateX(10px); /* Subtle shift on hover */
+        }
+
+        /* Update Score Link Styles */
+        a {
+            color: #39ff14;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            background-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #39ff14;
+            color: #121212; /* Dark text on neon background */
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                font-size: 28px;
+            }
+
+            .event-list {
+                padding: 20px;
+            }
+
+            li {
+                font-size: 16px;
+            }
+        }
+
+        /* Neon Glow Animation for Header */
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px rgba(0, 255, 0, 0.6), 0 0 10px rgba(0, 255, 0, 0.5), 0 0 15px rgba(0, 255, 0, 0.4);
+            }
+            100% {
+                text-shadow: 0 0 15px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.7), 0 0 50px rgba(0, 255, 0, 1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+{% block body %}
+    <!-- Main container for centering content -->
+    <div class="main-container">
+        <!-- Header -->
+        <h2 class="header">Upcoming Events</h2>
+
+        <!-- Event List -->
+        <div class="event-list">
+            <ul>
+                {% for event in events %}
+                    <li>
+                        <span>{{ event }}</span>
+                        <a href="{% url 'update_score' event.id %}">Update Score</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+</body>
+</html>

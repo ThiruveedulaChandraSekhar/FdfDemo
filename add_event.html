@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% extends 'navbar/projectnavbar.html' %}
+{% load static %}
+<html>
+<head>
+    <title>Add Event</title>
+    <style>
+        /* Body styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000; /* Black background */
+            color: #eaeaea; /* Light grey text */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Form container */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Form card styling */
+        .form-card {
+            width: 100%;
+            max-width: 450px;
+            background-color: #1a1a1a; /* Dark background for the form */
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 16px rgba(0, 128, 0, 0.3); /* Neon green shadow */
+        }
+
+        /* Heading */
+        .form-card h2 {
+            font-size: 28px;
+            color: #39ff14; /* Neon green text */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Label styling */
+        label {
+            margin-bottom: 10px;
+            color: #39ff14; /* Neon green label text */
+        }
+
+        /* Input fields styling */
+        input, select {
+            padding: 16px;
+            border: 1px solid #39ff14; /* Neon green border */
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: #1a1a1a; /* Dark input background */
+            font-size: 16px;
+            color: #39ff14; /* Neon green text */
+        }
+
+        input:focus, select:focus {
+            border-color: #33e00f; /* Slightly brighter neon green on focus */
+            outline: none;
+        }
+
+        /* Submit button styling */
+        button {
+            background-color: #39ff14; /* Neon green background */
+            color: #000000; /* Black text */
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #33e00f; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+
+{% block body %}
+    <div class="form-container">
+        <div class="form-card">
+            <h2>Add Event</h2>
+            <!-- Message display section -->
+            {% if messages %}
+                <div>
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Player 1 dropdown -->
+                <label for="player1">Player 1:</label>
+                <select id="player1" name="player1" required>
+                    {% for player in players %}
+                        <option value="{{ player.id }}">{{ player.player_name }}</option>
+                    {% endfor %}
+                </select>
+
+                <!-- Coach 1 input -->
+                <label for="coach1">Coach 1:</label>
+                <input type="text" id="coach1" name="coach1" required>
+
+                <!-- Player 2 dropdown -->
+                <label for="player2">Player 2:</label>
+                <select id="player2" name="player2" required>
+                    {% for player in players %}
+                        <option value="{{ player.id }}">{{ player.player_name }}</option>
+                    {% endfor %}
+                </select>
+
+                <!-- Coach 2 input -->
+                <label for="coach2">Coach 2:</label>
+                <input type="text" id="coach2" name="coach2" required>
+
+                <!-- Submit button -->
+                <button type="submit">Add Event</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+</body>
+</html>
